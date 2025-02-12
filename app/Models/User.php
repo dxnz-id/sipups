@@ -22,6 +22,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
     ];
 
     /**
@@ -45,5 +46,15 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function canAccessPanel(\Filament\Panel $panel): bool
+    {
+        return match ($this->role) {
+            'administrator' => $panel->getId() === 'admin',
+            'visitor' => $panel->getId() === 'visitor',
+            'officer' => $panel->getId() === 'officer',
+            default => false,
+        };
     }
 }
