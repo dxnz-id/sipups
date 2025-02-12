@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Spatie\Permission\Models\Role;
 use Spatie\Permission\Traits\HasRoles;
 
 
@@ -43,11 +44,7 @@ class UserResource extends Resource
                     ->required(),
                 Select::make('role')
                     ->label('Role')
-                    ->options([
-                        'administrator' => 'Administrator',
-                        'visitor' => 'Visitor',
-                        'officer' => 'Officer',
-                    ])
+                    ->options(Role::all()->pluck('name', 'name')) // Get roles from the database
                     ->required(),
             ]);
     }
