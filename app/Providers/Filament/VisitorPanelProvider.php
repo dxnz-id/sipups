@@ -25,6 +25,8 @@ class VisitorPanelProvider extends PanelProvider
         return $panel
             ->id('visitor')
             ->path('visitor')
+            ->login()
+            ->registration()
             ->colors([
                 'primary' => Color::Amber,
             ])
