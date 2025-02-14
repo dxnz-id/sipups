@@ -72,6 +72,10 @@ class UserResource extends Resource
                         'officer' => 'Officer',
                     ]),
             ])
+            ->actions([
+                Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
+            ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
