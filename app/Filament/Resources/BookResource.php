@@ -16,6 +16,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -58,10 +59,16 @@ class BookResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('title')->label('Title')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('author')->label('Author')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('isbn')->label('ISBN')->searchable(),
+                Tables\Columns\TextColumn::make('category.name')->label('Category')->searchable(),
+                Tables\Columns\TextColumn::make('published_at')->label('Published At')->searchable()->dateTime(),
             ])
             ->filters([
-                //
+                SelectFilter::make('category_id')
+                    ->options(Category::pluck('name', 'id'))
+                    ->label('Category'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
