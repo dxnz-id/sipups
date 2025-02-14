@@ -17,6 +17,7 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use App\Http\Middleware\AuthPanelMiddleware;
 
 class AuthPanelProvider extends PanelProvider
 {
@@ -50,6 +51,7 @@ class AuthPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
+                AuthPanelMiddleware::class
             ])
             ->authMiddleware([
                 Authenticate::class,

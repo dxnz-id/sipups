@@ -26,7 +26,6 @@ class VisitorPanelProvider extends PanelProvider
             ->id('visitor')
             ->path('visitor')
             ->login()
-            ->registration()
             ->colors([
                 'primary' => Color::Amber,
             ])
