@@ -20,6 +20,7 @@ use Filament\Forms\Components\TextInput;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\PermissionServiceProvider;
 use Spatie\Permission\Traits\HasRoles;
+use function Laravel\Prompts\search;
 
 
 class UserResource extends Resource
@@ -46,6 +47,7 @@ class UserResource extends Resource
                 Select::make('role')
                     ->label('Role')
                     ->options(Role::all()->pluck('name', 'name')) // Get roles from the database
+                    ->searchable()
                     ->required(),
             ]);
     }
@@ -66,12 +68,9 @@ class UserResource extends Resource
             ])
             ->filters([
                 SelectFilter::make('role')
-                    ->label('Filter Role')
-                    ->options([
-                        'administrator' => 'Administrator',
-                        'visitor' => 'Visitor',
-                        'officer' => 'Officer',
-                    ]),
+                ->label('Role Filter')
+                ->options(Role::pluck('name', 'id'))
+                ->searchable(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

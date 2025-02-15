@@ -69,8 +69,9 @@ class BookResource extends Resource
             ])
             ->filters([
                 SelectFilter::make('category_id')
+                    ->label('Category')
                     ->options(Category::pluck('name', 'id'))
-                    ->label('Category'),
+                    ->searchable()
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
