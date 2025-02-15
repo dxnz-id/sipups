@@ -32,6 +32,7 @@ class BookResource extends Resource
             ->schema([
                 TextInput::make('title')->required()->label('Title'),
                 TextInput::make('author')->required()->label('Author'),
+                TextInput::make('publisher')->required()->label('Publisher'),
                 DatePicker::make('published_at')->required()->label('Published At'),
                 TextInput::make('isbn')->required()->unique(Book::class)->label('ISBN (International Standard Book Number)'),
                 Select::make('category_id')
@@ -40,11 +41,6 @@ class BookResource extends Resource
                     ->searchable()
                     ->required(),
                 Textarea::make('description')->label('Description')->rows(4),
-                FileUpload::make('cover')
-                    ->image()
-                    ->label('Book Cover')
-                    ->minSize(4)
-                    ->maxSize(10240),
                 FileUpload::make('pdf_file')
                     ->label('PDF File')
                     ->acceptedFileTypes(['application/pdf'])
@@ -52,6 +48,11 @@ class BookResource extends Resource
                     ->maxSize(25600)
                     ->required()
                     ->previewable(false),
+                FileUpload::make('cover')
+                    ->image()
+                    ->label('Book Cover')
+                    ->minSize(4)
+                    ->maxSize(10240),
             ]);
     }
 
@@ -61,9 +62,10 @@ class BookResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('title')->label('Title')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('author')->label('Author')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('publisher')->label('Publisher')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('isbn')->label('ISBN')->searchable(),
                 Tables\Columns\TextColumn::make('category.name')->label('Category')->searchable(),
-                Tables\Columns\TextColumn::make('published_at')->label('Published At')->searchable()->dateTime(),
+                Tables\Columns\TextColumn::make('published_at')->label('Publish Date')->searchable()->dateTime('d-M-Y'),
             ])
             ->filters([
                 SelectFilter::make('category_id')
@@ -72,6 +74,7 @@ class BookResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
