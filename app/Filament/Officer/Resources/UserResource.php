@@ -2,8 +2,8 @@
 
 namespace App\Filament\Officer\Resources;
 
-use App\Filament\Resources\UserResource\Pages;
-use App\Filament\Resources\UserResource\RelationManagers;
+use App\Filament\Officer\Resources\UserResource\Pages;
+use App\Filament\Officer\Resources\UserResource\RelationManagers;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -18,7 +18,9 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\PermissionServiceProvider;
 use Spatie\Permission\Traits\HasRoles;
+use function Laravel\Prompts\search;
 
 
 class UserResource extends Resource
@@ -31,23 +33,18 @@ class UserResource extends Resource
 
     protected static ?string $navigationGroup = 'Access Management';
 
+    public static function canCreate(): bool
+    {
+        return false;
+    }
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                TextInput::make('name')
-                    ->label('Nama')
-                    ->required(),
-                TextInput::make('email')
-                    ->label('Email')
-                    ->email()
-                    ->required(),
-                Select::make('role')
-                    ->label('Role')
-                    ->options(Role::all()->pluck('name', 'name')) // Get roles from the database
-                    ->required(),
+            //
             ]);
-    }
+        }
 
     public static function table(Table $table): Table
     {
@@ -65,15 +62,9 @@ class UserResource extends Resource
             ])
             ->filters([
                 SelectFilter::make('role')
-                    ->label('Filter Role')
-                    ->options([
-                        'administrator' => 'Administrator',
-                        'visitor' => 'Visitor',
-                        'officer' => 'Officer',
-                    ]),
-            ])
-            ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+                ->label('Role Filter')
+                ->options(Role::pluck('name', 'id'))
+                ->searchable(),
             ]);
     }
 
@@ -81,7 +72,8 @@ class UserResource extends Resource
     {
         return [
             'index' => Pages\ListUsers::route('/'),
-            'edit' => Pages\EditUser::route('/{record}/edit'),
+            // 'create' => Pages\CreateUser::route('/create'),
+            // 'edit' => Pages\EditUser::route('/{record}/edit'),
         ];
     }
 }
