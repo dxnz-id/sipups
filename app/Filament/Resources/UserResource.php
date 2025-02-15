@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\PermissionServiceProvider;
 use Spatie\Permission\Traits\HasRoles;
 
 
