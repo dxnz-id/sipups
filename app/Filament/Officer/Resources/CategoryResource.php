@@ -37,7 +37,7 @@ class CategoryResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('name')->sortable()->searchable()->label('Category Name'),
-                TextColumn::make('updated_at')->dateTime()->label('Updated At'),
+                TextColumn::make('updated_at')->sortable()->dateTime()->label('Updated At'),
             ])
             ->filters([
                 //
