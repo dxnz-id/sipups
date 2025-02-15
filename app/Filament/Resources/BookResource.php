@@ -11,6 +11,7 @@ use Filament\Forms\Form;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
@@ -40,7 +41,13 @@ class BookResource extends Resource
                     ->options(Category::pluck('name', 'id'))
                     ->searchable()
                     ->required(),
-                Textarea::make('description')->label('Description')->rows(4),
+                FileUpload::make('cover')
+                    ->image()
+                    ->label('Book Cover')
+                    ->minSize(4)
+                    ->maxSize(10240)
+                    ->previewable(false)
+                    ->required(),
                 FileUpload::make('pdf_file')
                     ->label('PDF File')
                     ->acceptedFileTypes(['application/pdf'])
@@ -48,12 +55,11 @@ class BookResource extends Resource
                     ->maxSize(25600)
                     ->required()
                     ->previewable(false),
-                FileUpload::make('cover')
-                    ->image()
-                    ->label('Book Cover')
-                    ->minSize(4)
-                    ->maxSize(10240),
-            ]);
+
+                RichEditor::make('description')
+                    ->label('Description')
+                    ->columnSpan(2),
+                ]);
     }
 
     public static function table(Table $table): Table
