@@ -37,9 +37,20 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
-            //
+            TextInput::make('name')
+                ->label('Nama')
+                ->disabled(),
+            TextInput::make('email')
+                ->label('Email')
+                ->email()
+                ->disabled(),
+            Select::make('role')
+                ->label('Role')
+                ->options(Role::all()->pluck('name', 'name')) // Get roles from the database
+                ->searchable()
+                ->disabled(),
             ]);
-        }
+    }
 
     public static function table(Table $table): Table
     {
@@ -65,6 +76,11 @@ class UserResource extends Resource
                         'officer' => 'Officer',
                         'visitor' => 'Visitor',
                     ]),
+            ])
+            ->actions([
+                Tables\Actions\EditAction::make()
+                ->label(false)
+                ->icon(false),
             ]);
     }
 
