@@ -77,6 +77,7 @@ class BookResource extends Resource
                     ->label('Category')
                     ->options(Category::pluck('name', 'id'))
                     ->searchable()
+                    ->multiple()
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

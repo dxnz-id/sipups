@@ -58,6 +58,7 @@ class UserResource extends Resource
             ->filters([
                 SelectFilter::make('role')
                     ->label('Role')
+                    ->multiple()
                     ->options([
                         'administrator' => 'Administrator',
                         'officer' => 'Officer',

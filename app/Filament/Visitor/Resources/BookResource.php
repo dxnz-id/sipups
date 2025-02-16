@@ -101,6 +101,7 @@ class BookResource extends Resource
             ->filters([
                 SelectFilter::make('category_id')
                     ->label('Category')
+                    ->multiple()
                     ->options(Category::pluck('name', 'id'))
                     ->searchable(),
             ])
