@@ -47,8 +47,9 @@ class UserResource extends Resource
             ->columns([
                 TextColumn::make('name')->label('Username'),
                 TextColumn::make('email')->label('Email'),
-                BadgeColumn::make('role')
+                TextColumn::make('role')
                     ->label('Role')
+                    ->badge()
                     ->colors([
                         'success' => 'administrator',
                         'warning' => 'officer',
