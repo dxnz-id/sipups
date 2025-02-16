@@ -33,11 +33,6 @@ class UserResource extends Resource
 
     protected static ?string $navigationGroup = 'Access Management';
 
-    public static function canCreate(): bool
-    {
-        return false;
-    }
-
     public static function form(Form $form): Form
     {
         return $form
@@ -62,9 +57,12 @@ class UserResource extends Resource
             ])
             ->filters([
                 SelectFilter::make('role')
-                ->label('Role Filter')
-                ->options(Role::pluck('name', 'id'))
-                ->searchable(),
+                    ->label('Role')
+                    ->options([
+                        'administrator' => 'Administrator',
+                        'officer' => 'Officer',
+                        'visitor' => 'Visitor',
+                    ]),
             ]);
     }
 
