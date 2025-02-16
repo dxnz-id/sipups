@@ -80,27 +80,19 @@ class BookResource extends Resource
     {
         return $table
             ->columns([
-                Split::make([
+                Stack::make([
                     ImageColumn::make('cover')
                         ->label('Cover')
-                        ->width(150)
+                        ->width(250)
                         ->height('auto'),
-                    Stack::make([
-                        TextColumn::make('title')
-                            ->label('Title')
-                            ->extraAttributes(['class' => 'font-bold'])
-                            ->searchable()
-                            ->sortable(),
-                        TextColumn::make('author')
-                            ->label('Author')
-                            ->sortable()
-                            ->searchable(),
-                        TextColumn::make('published_at')
-                            ->label('Publish Date')
-                            ->sortable()
-                            ->dateTime('Y'),
-                    ]),
-                ]),
+                    TextColumn::make('title')
+                        ->label('Title')
+                        ->extraAttributes(['class' => 'font-bold'])
+                        ->searchable()
+                        ->sortable(),
+                ])
+
+
             ])
             ->contentGrid([
                 'md' => 2,
@@ -113,11 +105,12 @@ class BookResource extends Resource
                     ->searchable(),
             ])
             ->actions([
-                EditAction::make()->label('View Book')->icon('heroicon-o-book-open'),
+                EditAction::make()->label(false)->icon(false),
             ])
             ->contentGrid([
-                'md' => 2,
-                'xl' => 3,
+                'sm' => 1,
+                'md' => 3,
+                'xl' => 4,
             ]);
     }
 
