@@ -35,7 +35,10 @@ class BookResource extends Resource
                 TextInput::make('author')->required()->label('Author'),
                 TextInput::make('publisher')->required()->label('Publisher'),
                 DatePicker::make('published_at')->required()->label('Published At'),
-                TextInput::make('isbn')->required()->unique(Book::class)->label('ISBN (International Standard Book Number)'),
+                TextInput::make('isbn')
+                    ->required()
+                    ->unique(Book::class, 'isbn', ignoreRecord: true)
+                    ->label('ISBN (International Standard Book Number)'),
                 Select::make('category_id')
                     ->label('Category')
                     ->options(Category::pluck('name', 'id'))
