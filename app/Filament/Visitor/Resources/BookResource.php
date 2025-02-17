@@ -84,12 +84,13 @@ class BookResource extends Resource
                     ImageColumn::make('cover')
                         ->label('Cover')
                         ->width(250)
-                        ->height('auto'),
-                    TextColumn::make('title')
-                        ->label('Title')
-                        ->extraAttributes(['class' => 'font-bold'])
-                        ->searchable()
-                        ->sortable(),
+                        ->height(400)
+                        ->tooltip(fn ($record) => $record->title . ' - ' . $record->author),
+                    // TextColumn::make('title')
+                    //     ->label('Title')
+                    //     ->extraAttributes(['class' => 'font-bold'])
+                    //     ->searchable()
+                    //     ->sortable()
                 ])
 
 
