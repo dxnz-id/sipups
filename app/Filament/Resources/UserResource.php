@@ -39,11 +39,13 @@ class UserResource extends Resource
             ->schema([
                 TextInput::make('name')
                     ->label('Nama')
-                    ->required(),
+                    ->required()
+                    ->disabled(),
                 TextInput::make('email')
                     ->label('Email')
                     ->email()
-                    ->required(),
+                    ->required()
+                    ->disabled(),
                 Select::make('role')
                     ->label('Role')
                     ->options(Role::all()->pluck('name', 'name')) // Get roles from the database
