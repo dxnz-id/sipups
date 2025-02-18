@@ -13,13 +13,25 @@ use Filament\Tables\Table;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Filters\SelectFilter;
-use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Columns\Layout\Stack;
 use Filament\Tables\Columns\Layout\Split;
 use Filament\Tables\ContentGrid;
+use Filament\Resources\Pages\Page;
+use Filament\Infolists;
+use Filament\Infolists\Infolist;
+use Filament\Infolists\Components\ImageEntry;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Infolists\Components\Section;
+use Filament\Infolists\Components\Grid;
+use Filament\Infolists\Components\Action;
+use Filament\Infolists\Components\Actions;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\HtmlString;
 use function Symfony\Component\Translation\t;
+
 
 class BookResource extends Resource
 {
@@ -107,12 +119,39 @@ class BookResource extends Resource
                     ->searchable(),
             ])
             ->actions([
-                EditAction::make()->label(false)->icon(false),
+                ViewAction::make()->label(false)->icon(false),
             ])
             ->contentGrid([
                 'sm' => 1,
                 'md' => 3,
                 'xl' => 4,
+            ]);
+    }
+
+    public static function infolist(Infolist $infolist): Infolist
+    {
+        return $infolist
+        ->schema([
+            Grid::make(2) // Grid dengan 2 kolom
+                ->schema([
+                    // Kolom kiri (Cover Buku)
+                    ImageEntry::make('cover')
+                        ->label(false)
+                        ->width(200)
+                        ->height(300),
+                    
+                    // Kolom kanan (Detail Buku)
+                    Section::make()
+                        ->schema([
+                            TextEntry::make('title')->label('Title')->columnSpanFull(),
+                            TextEntry::make('author')->label('Author'),
+                            TextEntry::make('publisher')->label('Publisher'),
+                            TextEntry::make('published_at')->label('Publish Date')->date('Y-m-d'),
+                            TextEntry::make('isbn')->label('ISBN'),
+                            TextEntry::make('category.name')->label('Category'),
+                            TextEntry::make('description')->label('Description')->columnSpanFull()->default('No description.'),
+                        ])
+                ]),
             ]);
     }
 
