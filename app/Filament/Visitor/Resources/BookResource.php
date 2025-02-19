@@ -5,6 +5,7 @@ namespace App\Filament\Visitor\Resources;
 use App\Filament\Visitor\Resources\BookResource\Pages;
 use App\Models\Book;
 use App\Models\Category;
+use Faker\Provider\ar_EG\Text;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -31,6 +32,7 @@ use Filament\Infolists\Components\Actions;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\HtmlString;
 use function Symfony\Component\Translation\t;
+use Filament\Infolists\Components\ButtonEntry;
 
 
 class BookResource extends Resource
@@ -131,52 +133,35 @@ class BookResource extends Resource
     public static function infolist(Infolist $infolist): Infolist
     {
         return $infolist
-            ->schema([
-                // Split::make([])
-                ImageEntry::make('cover')
-                    ->label(false)
-                    ->width(250)
-                    ->height(400)
-                    ->columns(),
-                Section::make()
-                    ->schema([
-                    TextEntry::make('title')
-                        ->columns(),
-                    TextEntry::make('author')
-                        ->columns(),
-                    TextEntry::make('publisher')
-                        ->columns(),
-                    TextEntry::make('published_at')
-                        ->columns(),
-                    TextEntry::make('isbn')
-                        ->columns(),
-                    TextEntry::make('category.name')
-                        ->columns(),
-                    TextEntry::make('description')
-                    ->default('No description :)')
-                        ->markdown()
-                        ->columns(),
-                ])->label(false)->columns(),
+        ->schema([
+            Grid::make(2) // ✅ Membagi tampilan menjadi 2 kolom (Cover | Detail)
+                ->schema([
+                    // Kolom kiri untuk Cover
+                    Section::make(false)
+                        ->schema([
+                            ImageEntry::make('cover')
+                                ->label(false)
+                                ->width(250 * 1.5)
+                                ->height(400 * 1.5),
+                        ])
+                        ->columnSpan(1)->collapsible(false)->compact(true),
 
-
-
-                // Section::make('Contact Information')
-                //     ->schema([
-                //         TextEntry::make('email'),
-                //         TextEntry::make('phone_number'),
-                //     ])
-                //     ->columns(),
-                // Section::make('Additional Details')
-                //     ->schema([
-                //         TextEntry::make('description'),
-                //     ]),
-                // Section::make('Lead and Stage Information')
-                //     ->schema([
-                //         TextEntry::make('leadSource.name'),
-                //         TextEntry::make('pipelineStage.name'),
-                //     ])
-                //     ->columns(),
-            ]);
+                    // Kolom kanan untuk Detail Buku & Tombol
+                    Section::make(fn($record) => $record->title)
+                        ->schema([
+                            TextEntry::make('author')->label('Author'),
+                            TextEntry::make('publisher')->label('Publisher'),
+                            TextEntry::make('published_at')->label('Published At')->date('Y-m-d'),
+                            TextEntry::make('isbn')->label('ISBN'),
+                            TextEntry::make('category.name')->label('Category')->badge(),
+                                TextEntry::make('description')
+                                    ->label('Description')
+                                    ->default('No description available.')
+                                    ->markdown(),
+                        ])
+                        ->columnSpan(1)->collapsible(false)->compact(false),
+                ]),
+        ]);
     }
 
     public static function getPages(): array
