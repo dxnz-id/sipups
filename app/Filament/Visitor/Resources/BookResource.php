@@ -149,7 +149,7 @@ class BookResource extends Resource
                             TextEntry::make('published_at')->label('Publish Date')->date('Y-m-d'),
                             TextEntry::make('isbn')->label('ISBN'),
                             TextEntry::make('category.name')->label('Category'),
-                            TextEntry::make('description')->label('Description')->columnSpanFull()->default('No description.'),
+                            TextEntry::make('description')->label('Description')->columnSpanFull()->default('No description.')->markdown(),
                         ])
                 ]),
             ]);
