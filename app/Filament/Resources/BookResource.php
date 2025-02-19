@@ -85,8 +85,8 @@ class BookResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make()
-                ->label(false)
-                ->icon(false),
+                    ->label(false)
+                    ->icon(false),
                 Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([

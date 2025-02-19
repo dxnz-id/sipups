@@ -97,7 +97,7 @@ class BookResource extends Resource
                         ->label('Cover')
                         ->width(250)
                         ->height(400)
-                        ->tooltip(fn ($record) => $record->title . ' - ' . $record->author),
+                        ->tooltip(fn($record) => $record->title . ' - ' . $record->author),
                     // TextColumn::make('title')
                     //     ->label('Title')
                     //     ->extraAttributes(['class' => 'font-bold'])
@@ -119,7 +119,7 @@ class BookResource extends Resource
                     ->searchable(),
             ])
             ->actions([
-                ViewAction::make()->label(false)->icon(false),
+                ViewAction::make()->label(false)->icon(false)->slideOver(),
             ])
             ->contentGrid([
                 'sm' => 1,
@@ -131,27 +131,51 @@ class BookResource extends Resource
     public static function infolist(Infolist $infolist): Infolist
     {
         return $infolist
-        ->schema([
-            Grid::make(2) // Grid dengan 2 kolom
-                ->schema([
-                    // Kolom kiri (Cover Buku)
-                    ImageEntry::make('cover')
-                        ->label(false)
-                        ->width(200)
-                        ->height(300),
-                    
-                    // Kolom kanan (Detail Buku)
-                    Section::make()
-                        ->schema([
-                            TextEntry::make('title')->label('Title')->columnSpanFull(),
-                            TextEntry::make('author')->label('Author'),
-                            TextEntry::make('publisher')->label('Publisher'),
-                            TextEntry::make('published_at')->label('Publish Date')->date('Y-m-d'),
-                            TextEntry::make('isbn')->label('ISBN'),
-                            TextEntry::make('category.name')->label('Category'),
-                            TextEntry::make('description')->label('Description')->columnSpanFull()->default('No description.')->markdown(),
-                        ])
-                ]),
+            ->schema([
+                // Split::make([])
+                ImageEntry::make('cover')
+                    ->label(false)
+                    ->width(250)
+                    ->height(400)
+                    ->columns(),
+                Section::make()
+                    ->schema([
+                    TextEntry::make('title')
+                        ->columns(),
+                    TextEntry::make('author')
+                        ->columns(),
+                    TextEntry::make('publisher')
+                        ->columns(),
+                    TextEntry::make('published_at')
+                        ->columns(),
+                    TextEntry::make('isbn')
+                        ->columns(),
+                    TextEntry::make('category.name')
+                        ->columns(),
+                    TextEntry::make('description')
+                    ->default('No description :)')
+                        ->markdown()
+                        ->columns(),
+                ])->label(false)->columns(),
+
+
+
+                // Section::make('Contact Information')
+                //     ->schema([
+                //         TextEntry::make('email'),
+                //         TextEntry::make('phone_number'),
+                //     ])
+                //     ->columns(),
+                // Section::make('Additional Details')
+                //     ->schema([
+                //         TextEntry::make('description'),
+                //     ]),
+                // Section::make('Lead and Stage Information')
+                //     ->schema([
+                //         TextEntry::make('leadSource.name'),
+                //         TextEntry::make('pipelineStage.name'),
+                //     ])
+                //     ->columns(),
             ]);
     }
 
