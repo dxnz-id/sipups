@@ -27,7 +27,7 @@ use Filament\Infolists\Components\ImageEntry;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\Grid;
-use Filament\Infolists\Components\Action;
+use Filament\Infolists\Components\Actions\Action;
 use Filament\Infolists\Components\Actions;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\HtmlString;
@@ -158,6 +158,13 @@ class BookResource extends Resource
                                     ->label('Description')
                                     ->default('No description available.')
                                     ->markdown(),
+                                Actions::make([
+                                    Action::make('view_book')
+                                        ->label('View Book')
+                                        ->url(fn (Book $record): string => Storage::url($record->pdf_file))
+                                        ->openUrlInNewTab()
+                                        ->icon('heroicon-o-book-open'),
+                                ]),
                         ])
                         ->columnSpan(1)->collapsible(false)->compact(false),
                 ]),
