@@ -20,6 +20,7 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 use App\Http\Middleware\AuthPanelMiddleware;
 use Andreia\FilamentNordTheme\FilamentNordThemePlugin;
 use Cmsmaxinc\FilamentErrorPages\FilamentErrorPagesPlugin;
+use Devonab\FilamentEasyFooter\EasyFooterPlugin;
 
 class AuthPanelProvider extends PanelProvider
 {
@@ -62,6 +63,9 @@ class AuthPanelProvider extends PanelProvider
             ->plugins([
                 FilamentNordThemePlugin::make(),
                 FilamentErrorPagesPlugin::make(),
+                EasyFooterPlugin::make()
+                    ->withFooterPosition('footer')
+                    ->withSentence('DXNZiD'),
             ]);
     }
 }

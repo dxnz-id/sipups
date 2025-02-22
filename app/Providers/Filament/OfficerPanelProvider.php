@@ -20,6 +20,7 @@ use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Andreia\FilamentNordTheme\FilamentNordThemePlugin;
 use Cmsmaxinc\FilamentErrorPages\FilamentErrorPagesPlugin;
+use Devonab\FilamentEasyFooter\EasyFooterPlugin;
 
 class OfficerPanelProvider extends PanelProvider
 {
@@ -61,6 +62,9 @@ class OfficerPanelProvider extends PanelProvider
             ->plugins([
                 FilamentNordThemePlugin::make(),
                 FilamentErrorPagesPlugin::make(),
+                EasyFooterPlugin::make()
+                    ->withFooterPosition('footer')
+                    ->withSentence('DXNZiD'),
             ]);
     }
 }

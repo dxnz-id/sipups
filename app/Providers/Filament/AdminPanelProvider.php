@@ -21,6 +21,7 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 use App\Http\Middleware\AdminPanelMiddleware;
 use Andreia\FilamentNordTheme\FilamentNordThemePlugin;
 use Cmsmaxinc\FilamentErrorPages\FilamentErrorPagesPlugin;
+use Devonab\FilamentEasyFooter\EasyFooterPlugin;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -63,6 +64,9 @@ class AdminPanelProvider extends PanelProvider
             ->plugins([
                 FilamentNordThemePlugin::make(),
                 FilamentErrorPagesPlugin::make(),
+                EasyFooterPlugin::make()
+                    ->withFooterPosition('footer')
+                    ->withSentence('DXNZiD'),
             ]);
     }
 }
