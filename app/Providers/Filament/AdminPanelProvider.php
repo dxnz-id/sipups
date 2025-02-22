@@ -22,6 +22,7 @@ use App\Http\Middleware\AdminPanelMiddleware;
 use Andreia\FilamentNordTheme\FilamentNordThemePlugin;
 use Cmsmaxinc\FilamentErrorPages\FilamentErrorPagesPlugin;
 use Devonab\FilamentEasyFooter\EasyFooterPlugin;
+use Joaopaulolndev\FilamentEditProfile\FilamentEditProfilePlugin;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -63,10 +64,18 @@ class AdminPanelProvider extends PanelProvider
             ->sidebarCollapsibleOnDesktop()
             ->plugins([
                 FilamentNordThemePlugin::make(),
-                FilamentErrorPagesPlugin::make(),
+                // FilamentErrorPagesPlugin::make(),
                 EasyFooterPlugin::make()
                     ->withFooterPosition('footer')
                     ->withSentence('DXNZiD'),
+                FilamentEditProfilePlugin::make()
+                    ->setTitle('My Profile')
+                    ->setNavigationLabel('My Profile')
+                    ->setNavigationGroup('My Account')
+                    ->setIcon('heroicon-o-user')
+                    ->setSort(10)
+                    ->shouldShowBrowserSessionsForm()
+                    ->shouldShowAvatarForm()
             ]);
     }
 }
