@@ -18,6 +18,7 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Andreia\FilamentNordTheme\FilamentNordThemePlugin;
 
 class OfficerPanelProvider extends PanelProvider
 {
@@ -27,6 +28,7 @@ class OfficerPanelProvider extends PanelProvider
             ->id('officer')
             ->path('officer')
             ->login()
+            ->plugin(new FilamentNordThemePlugin())
             ->colors([
                 'primary' => Color::Amber,
             ])
