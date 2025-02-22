@@ -50,6 +50,7 @@ class BookResource extends Resource
                     ->minSize(4)
                     ->maxSize(10240)
                     ->previewable(false)
+                    ->directory('covers')
                     ->required(),
                 FileUpload::make('pdf_file')
                     ->label('PDF File')
@@ -57,8 +58,8 @@ class BookResource extends Resource
                     ->minSize(4)
                     ->maxSize(25600)
                     ->required()
+                    ->directory('pdfs')
                     ->previewable(false),
-
                 RichEditor::make('description')
                     ->label('Description')
                     ->columnSpan(2),
