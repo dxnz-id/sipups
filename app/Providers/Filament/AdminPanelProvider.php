@@ -20,6 +20,7 @@ use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use App\Http\Middleware\AdminPanelMiddleware;
 use Andreia\FilamentNordTheme\FilamentNordThemePlugin;
+use Cmsmaxinc\FilamentErrorPages\FilamentErrorPagesPlugin;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -61,6 +62,7 @@ class AdminPanelProvider extends PanelProvider
             ->sidebarCollapsibleOnDesktop()
             ->plugins([
                 FilamentNordThemePlugin::make(),
+                FilamentErrorPagesPlugin::make(),
             ]);
     }
 }

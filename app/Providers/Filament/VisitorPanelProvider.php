@@ -18,6 +18,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Andreia\FilamentNordTheme\FilamentNordThemePlugin;
+use Cmsmaxinc\FilamentErrorPages\FilamentErrorPagesPlugin;
 
 class VisitorPanelProvider extends PanelProvider
 {
@@ -27,9 +28,6 @@ class VisitorPanelProvider extends PanelProvider
             ->id('visitor')
             ->path('visitor')
             ->login()
-            ->plugins([
-                FilamentNordThemePlugin::make(),
-                ])
             ->colors([
                 'primary' => Color::Amber,
             ])
@@ -57,6 +55,10 @@ class VisitorPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])
-            ->sidebarCollapsibleOnDesktop();
+            ->sidebarCollapsibleOnDesktop()
+            ->plugins([
+                FilamentNordThemePlugin::make(),
+                FilamentErrorPagesPlugin::make(),
+            ]);
     }
 }

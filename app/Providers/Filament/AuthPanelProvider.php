@@ -19,6 +19,7 @@ use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use App\Http\Middleware\AuthPanelMiddleware;
 use Andreia\FilamentNordTheme\FilamentNordThemePlugin;
+use Cmsmaxinc\FilamentErrorPages\FilamentErrorPagesPlugin;
 
 class AuthPanelProvider extends PanelProvider
 {
@@ -29,9 +30,6 @@ class AuthPanelProvider extends PanelProvider
             ->path('auth')
             ->login()
             ->registration()
-            ->plugins([
-                FilamentNordThemePlugin::make(),
-                ])
             ->colors([
                 'primary' => Color::Amber,
             ])
@@ -60,6 +58,10 @@ class AuthPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])
-            ->sidebarCollapsibleOnDesktop();
+            ->sidebarCollapsibleOnDesktop()
+            ->plugins([
+                FilamentNordThemePlugin::make(),
+                FilamentErrorPagesPlugin::make(),
+            ]);
     }
 }

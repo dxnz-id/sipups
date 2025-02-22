@@ -19,6 +19,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Andreia\FilamentNordTheme\FilamentNordThemePlugin;
+use Cmsmaxinc\FilamentErrorPages\FilamentErrorPagesPlugin;
 
 class OfficerPanelProvider extends PanelProvider
 {
@@ -28,9 +29,6 @@ class OfficerPanelProvider extends PanelProvider
             ->id('officer')
             ->path('officer')
             ->login()
-            ->plugins([
-                FilamentNordThemePlugin::make(),
-                ])
             ->colors([
                 'primary' => Color::Amber,
             ])
@@ -59,6 +57,10 @@ class OfficerPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])
-            ->sidebarCollapsibleOnDesktop();
+            ->sidebarCollapsibleOnDesktop()
+            ->plugins([
+                FilamentNordThemePlugin::make(),
+                FilamentErrorPagesPlugin::make(),
+            ]);
     }
 }
