@@ -28,7 +28,9 @@ class OfficerPanelProvider extends PanelProvider
             ->id('officer')
             ->path('officer')
             ->login()
-            ->plugin(new FilamentNordThemePlugin())
+            ->plugins([
+                FilamentNordThemePlugin::make(),
+                ])
             ->colors([
                 'primary' => Color::Amber,
             ])

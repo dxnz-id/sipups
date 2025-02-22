@@ -18,6 +18,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use App\Http\Middleware\AuthPanelMiddleware;
+use Andreia\FilamentNordTheme\FilamentNordThemePlugin;
 
 class AuthPanelProvider extends PanelProvider
 {
@@ -28,6 +29,9 @@ class AuthPanelProvider extends PanelProvider
             ->path('auth')
             ->login()
             ->registration()
+            ->plugins([
+                FilamentNordThemePlugin::make(),
+                ])
             ->colors([
                 'primary' => Color::Amber,
             ])

@@ -27,7 +27,9 @@ class VisitorPanelProvider extends PanelProvider
             ->id('visitor')
             ->path('visitor')
             ->login()
-            ->plugin(new FilamentNordThemePlugin)
+            ->plugins([
+                FilamentNordThemePlugin::make(),
+                ])
             ->colors([
                 'primary' => Color::Amber,
             ])
