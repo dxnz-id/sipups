@@ -70,7 +70,6 @@ class OfficerPanelProvider extends PanelProvider
             ])
             ->sidebarCollapsibleOnDesktop()
             ->plugins([
-                FilamentNordThemePlugin::make(),
                 FilamentErrorPagesPlugin::make(),
                 EasyFooterPlugin::make()
                     ->withFooterPosition('footer')
