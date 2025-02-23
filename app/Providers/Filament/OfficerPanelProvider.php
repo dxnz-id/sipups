@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use Filament\Facades\Filament;
 use App\Http\Middleware\OfficerPanelMiddleware;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
@@ -21,6 +22,9 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Andreia\FilamentNordTheme\FilamentNordThemePlugin;
 use Cmsmaxinc\FilamentErrorPages\FilamentErrorPagesPlugin;
 use Devonab\FilamentEasyFooter\EasyFooterPlugin;
+use Filament\Navigation\MenuItem;
+use Joaopaulolndev\FilamentEditProfile\FilamentEditProfilePlugin;
+use Joaopaulolndev\FilamentEditProfile\Pages\EditProfilePage;
 
 class OfficerPanelProvider extends PanelProvider
 {
@@ -58,6 +62,12 @@ class OfficerPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])
+            ->userMenuItems([
+                'profile' => MenuItem::make()
+                    ->label(fn() => Filament::auth()->user()->name)
+                    ->url(fn(): string => EditProfilePage::getUrl())
+                    ->icon('heroicon-m-user-circle'),
+            ])
             ->sidebarCollapsibleOnDesktop()
             ->plugins([
                 FilamentNordThemePlugin::make(),
@@ -65,6 +75,13 @@ class OfficerPanelProvider extends PanelProvider
                 EasyFooterPlugin::make()
                     ->withFooterPosition('footer')
                     ->withSentence('DXNZiD'),
+                FilamentEditProfilePlugin::make()
+                    ->setTitle('My Profile')
+                    ->setNavigationLabel('My Profile')
+                    ->setNavigationGroup('My Account')
+                    ->setIcon('heroicon-o-user')
+                    ->setSort(10)
+                    ->shouldShowBrowserSessionsForm()
             ]);
     }
 }
