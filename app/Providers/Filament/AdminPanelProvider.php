@@ -84,7 +84,11 @@ class AdminPanelProvider extends PanelProvider
                     ->setIcon('heroicon-o-user')
                     ->setSort(10)
                     ->shouldShowBrowserSessionsForm()
-                    ->shouldShowAvatarForm()
+                    // ->shouldShowAvatarForm(
+                        // value:true,
+                        // directory:'/avatars',
+                        // rules: ['mimes:jpeg,png'],
+                    // )
             ]);
     }
 }
