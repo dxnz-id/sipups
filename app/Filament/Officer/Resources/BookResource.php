@@ -48,7 +48,9 @@ class BookResource extends Resource
                     ->label('Book Cover')
                     ->minSize(4)
                     ->maxSize(10240)
-                    ->previewable(false)
+                    ->previewable(true)
+                    ->imageEditor(true)
+                    ->imagePreviewHeight('76')
                     ->directory('covers')
                     ->required(),
                 FileUpload::make('pdf_file')
