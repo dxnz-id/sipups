@@ -162,7 +162,6 @@ class BookResource extends Resource
                                     Action::make('view_book')
                                         ->label('View Book')
                                         ->url(fn (Book $record): string => Storage::url($record->pdf_file))
-                                        ->openUrlInNewTab()
                                         ->icon('heroicon-o-book-open'),
                                 ]),
                         ])
