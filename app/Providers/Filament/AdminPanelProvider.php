@@ -26,6 +26,7 @@ use Devonab\FilamentEasyFooter\EasyFooterPlugin;
 use Filament\Navigation\MenuItem;
 use Joaopaulolndev\FilamentEditProfile\FilamentEditProfilePlugin;
 use Joaopaulolndev\FilamentEditProfile\Pages\EditProfilePage;
+use Awcodes\LightSwitch\LightSwitchPlugin;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -72,7 +73,8 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->sidebarCollapsibleOnDesktop()
             ->plugins([
-                // FilamentErrorPagesPlugin::make(),
+                FilamentErrorPagesPlugin::make(),
+                LightSwitchPlugin::make(),
                 EasyFooterPlugin::make()
                     ->withFooterPosition('footer')
                     ->withSentence('DXNZiD'),

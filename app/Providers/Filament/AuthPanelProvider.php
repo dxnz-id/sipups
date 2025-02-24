@@ -21,6 +21,7 @@ use App\Http\Middleware\AuthPanelMiddleware;
 use Andreia\FilamentNordTheme\FilamentNordThemePlugin;
 use Cmsmaxinc\FilamentErrorPages\FilamentErrorPagesPlugin;
 use Devonab\FilamentEasyFooter\EasyFooterPlugin;
+use Awcodes\LightSwitch\LightSwitchPlugin;
 
 class AuthPanelProvider extends PanelProvider
 {
@@ -62,6 +63,7 @@ class AuthPanelProvider extends PanelProvider
             ->sidebarCollapsibleOnDesktop()
             ->plugins([
                 FilamentErrorPagesPlugin::make(),
+                LightSwitchPlugin::make(),
                 EasyFooterPlugin::make()
                     ->withFooterPosition('footer')
                     ->withSentence('DXNZiD'),
