@@ -35,7 +35,7 @@ class VisitorPanelProvider extends PanelProvider
             ->path('visitor')
             ->login()
             ->colors([
-                'primary' => Color::Amber,
+                'primary' => Color::Violet,
             ])
             ->discoverResources(in: app_path('Filament/Visitor/Resources'), for: 'App\\Filament\\Visitor\\Resources')
             ->discoverPages(in: app_path('Filament/Visitor/Pages'), for: 'App\\Filament\\Visitor\\Pages')

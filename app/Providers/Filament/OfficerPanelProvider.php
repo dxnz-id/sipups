@@ -20,6 +20,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Andreia\FilamentNordTheme\FilamentNordThemePlugin;
+use Awcodes\LightSwitch\LightSwitchPlugin;
 use Cmsmaxinc\FilamentErrorPages\FilamentErrorPagesPlugin;
 use Devonab\FilamentEasyFooter\EasyFooterPlugin;
 use Filament\Navigation\MenuItem;
@@ -35,7 +36,7 @@ class OfficerPanelProvider extends PanelProvider
             ->path('officer')
             ->login()
             ->colors([
-                'primary' => Color::Amber,
+                'primary' => Color::Violet,
             ])
             ->discoverResources(in: app_path('Filament/Officer/Resources'), for: 'App\\Filament\\Officer\\Resources')
             ->discoverPages(in: app_path('Filament/Officer/Pages'), for: 'App\\Filament\\Officer\\Pages')
@@ -71,6 +72,7 @@ class OfficerPanelProvider extends PanelProvider
             ->sidebarCollapsibleOnDesktop()
             ->plugins([
                 FilamentErrorPagesPlugin::make(),
+                LightSwitchPlugin::make(),
                 EasyFooterPlugin::make()
                     ->withFooterPosition('footer')
                     ->withSentence('DXNZiD'),
