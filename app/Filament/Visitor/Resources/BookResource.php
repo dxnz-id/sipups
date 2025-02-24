@@ -33,6 +33,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\HtmlString;
 use function Symfony\Component\Translation\t;
 use Filament\Infolists\Components\ButtonEntry;
+use Joaopaulolndev\FilamentPdfViewer\Infolists\Components\PdfViewerEntry;
 
 
 class BookResource extends Resource
@@ -158,15 +159,20 @@ class BookResource extends Resource
                                     ->label('Description')
                                     ->default('No description available.')
                                     ->markdown(),
-                                Actions::make([
-                                    Action::make('view_book')
-                                        ->label('View Book')
-                                        ->url(fn (Book $record): string => Storage::url($record->pdf_file))
-                                        ->icon('heroicon-o-book-open'),
-                                ]),
+                                // Actions::make([
+                                //     Action::make('view_book')
+                                //         ->label('View Book')
+                                //         ->url(fn (Book $record): string => Storage::url($record->pdf_file))
+                                //         ->icon('heroicon-o-book-open'),
+                                // ]),
                         ])
                         ->columnSpan(1)->collapsible(false)->compact(false),
                 ]),
+                PdfViewerEntry::make('file')
+                    ->label(false)
+                    ->minHeight('75svh')
+                    ->fileUrl(fn (Book $record): string => Storage::url($record->pdf_file))
+                    ->columnSpanFull()
         ]);
     }
 
