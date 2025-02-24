@@ -20,6 +20,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Andreia\FilamentNordTheme\FilamentNordThemePlugin;
+use App\Filament\Widgets\NewestBook;
 use App\Filament\Widgets\StatsOverview;
 use Awcodes\LightSwitch\LightSwitchPlugin;
 use Cmsmaxinc\FilamentErrorPages\FilamentErrorPagesPlugin;
@@ -47,6 +48,7 @@ class OfficerPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Officer/Widgets'), for: 'App\\Filament\\Officer\\Widgets')
             ->widgets([
                 StatsOverview::class,
+                NewestBook::class,
             ])
             ->middleware([
                 EncryptCookies::class,

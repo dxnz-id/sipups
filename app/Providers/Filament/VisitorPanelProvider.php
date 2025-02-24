@@ -19,6 +19,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Andreia\FilamentNordTheme\FilamentNordThemePlugin;
+use App\Filament\Widgets\NewestBook;
 use App\Filament\Widgets\StatsOverview;
 use Cmsmaxinc\FilamentErrorPages\FilamentErrorPagesPlugin;
 use Devonab\FilamentEasyFooter\EasyFooterPlugin;
@@ -46,6 +47,7 @@ class VisitorPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Visitor/Widgets'), for: 'App\\Filament\\Visitor\\Widgets')
             ->widgets([
                 StatsOverview::class,
+                NewestBook::class,
             ])
             ->middleware([
                 EncryptCookies::class,
