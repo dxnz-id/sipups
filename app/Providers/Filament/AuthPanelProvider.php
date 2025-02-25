@@ -28,7 +28,7 @@ class AuthPanelProvider extends PanelProvider
     public function panel(Panel $panel): Panel
     {
         return $panel
-            ->brandName('Auth | SIPUPS')
+            ->brandName('SIPUPS')
             ->favicon(asset('storage/icons/favicon.svg')) 
             ->id('auth')
             ->path('auth')
