@@ -21,6 +21,7 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Andreia\FilamentNordTheme\FilamentNordThemePlugin;
 use App\Filament\Widgets\NewestBook;
 use App\Filament\Widgets\StatsOverview;
+use App\Http\Middleware\VisitorPanelMiddleware;
 use Cmsmaxinc\FilamentErrorPages\FilamentErrorPagesPlugin;
 use Devonab\FilamentEasyFooter\EasyFooterPlugin;
 use Filament\Navigation\MenuItem;
@@ -61,6 +62,7 @@ class VisitorPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
+                VisitorPanelMiddleware::class,
             ])
             ->authMiddleware([
                 Authenticate::class,
