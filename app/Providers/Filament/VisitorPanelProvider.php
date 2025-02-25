@@ -33,6 +33,8 @@ class VisitorPanelProvider extends PanelProvider
     public function panel(Panel $panel): Panel
     {
         return $panel
+            ->brandName('Visitor | SIPUPS')
+            ->favicon(asset('storage/icons/favicon.svg')) 
             ->id('visitor')
             ->path('visitor')
             ->login()

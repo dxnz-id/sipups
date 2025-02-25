@@ -34,6 +34,8 @@ class OfficerPanelProvider extends PanelProvider
     public function panel(Panel $panel): Panel
     {
         return $panel
+            ->brandName('Officer | SIPUPS')
+            ->favicon(asset('storage/icons/favicon.svg'))
             ->id('officer')
             ->path('officer')
             ->login()

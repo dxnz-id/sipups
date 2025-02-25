@@ -35,6 +35,8 @@ class AdminPanelProvider extends PanelProvider
     {
         return $panel
             ->default()
+            ->brandName('Admin | SIPUPS')
+            ->favicon(asset('storage/icons/favicon.svg')) 
             ->id('admin')
             ->path('admin')
             ->login()
